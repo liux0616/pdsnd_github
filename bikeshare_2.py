@@ -20,7 +20,7 @@ def get_filters():
     while True:
         city=input('\nWould you like to see data for Chicago, New York City, or Washington? ')
         city=city.lower()
-        if city in ['chicago','new york city','washinton']:
+        if city in ['chicago','new york city','washginton']:
             break
         else:
             print('\nThis is an invalid input, please enter Chicago, New York City, or Washington ')
@@ -176,11 +176,25 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def disp_raw_data(df):
+    i=0
+    print('\nWould you like to see the first 5 row of raw data?')
+    raw_data = input('\n Type Yes or No: ')
+    raw_data = raw_data.lower()
+    while True:
+        if raw_data != 'yes':
+            break
+        print(df[i:i+5])
+        print('\nWould you like to see next 5 rows of raw data?')
+        raw_data = input('\n Type Yes or No: ').lower()
+        i +=5
+
 
 def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
+        disp_raw_data(df)
 
         time_stats(df)
         station_stats(df)
